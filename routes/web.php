@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KlientiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
-use App\Models\User;
 
 // =======================
 // Faqja kryesore (public)
@@ -68,7 +69,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/kerko-klient', [AdminController::class, 'kerkoKlient'])->name('admin.kerko.klient');
 });
 
-use Illuminate\Support\Facades\Hash;
+
 
 Route::get('/create-users', function () {
     User::updateOrCreate(
