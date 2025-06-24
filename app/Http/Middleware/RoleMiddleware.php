@@ -7,20 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string  $role
-     * @return mixed
-     */
     public function handle($request, Closure $next, $role)
     {
         if (!Auth::check() || Auth::user()->role !== $role) {
-            abort(403, 'Akses i ndaluar.');
+            abort(403, 'Access denied.');
         }
-
         return $next($request);
     }
 }
