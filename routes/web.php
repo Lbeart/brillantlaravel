@@ -24,7 +24,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // =======================
 // Rrugët për USER (Punëtor)
 // =======================
-Route::middleware(['auth', 'role:user'])->group(function () {
+ 
 
     // Krijimi dhe menaxhimi i klientëve
     Route::get('/brillants/create', [KlientiController::class, 'A']);
@@ -43,12 +43,12 @@ Route::middleware(['auth', 'role:user'])->group(function () {
             ->get();
         return view('user.dashboard', compact('klientet'));
     })->name('user.dashboard');
-});
+
 
 // =======================
 // Rrugët për ADMIN
 // =======================
-Route::middleware(['auth', 'role:admin'])->group(function () {
+
 
     // Dashboard për adminin
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -67,30 +67,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/punetoret/{id}/invoice', [AdminController::class, 'invoice'])->name('admin.punetoret.invoice');
     Route::get('/admin/faturat/{muaji}', [AdminController::class, 'faturatPerMuaj'])->name('admin.fatura.muaji');
     Route::get('/admin/kerko-klient', [AdminController::class, 'kerkoKlient'])->name('admin.kerko.klient');
-});
 
 
 
 
-
-Route::get('/create-users', function () {
-    User::updateOrCreate(
-        ['email' => 'admin@example.com'],
-        [
-            'name' => 'Admin',
-            'password' => Hash::make('admin123'),
-            'role' => 'admin',
-        ]
-    );
-
-    User::updateOrCreate(
-        ['email' => 'brillant@gmail.com'],
-        [
-            'name' => 'User',
-            'password' => Hash::make('brillant123'),
-            'role' => 'user',
-        ]
-    );
-
-    return '✅ Admin dhe User u krijuan me sukses!';
-});
