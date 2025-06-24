@@ -71,12 +71,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 
+
+
 Route::get('/create-users', function () {
     User::updateOrCreate(
-        ['email' => 'shefat@gmail.com'],
+        ['email' => 'admin@example.com'],
         [
             'name' => 'Admin',
-            'password' => Hash::make('shefat123'),
+            'password' => Hash::make('admin123'),
             'role' => 'admin',
         ]
     );
