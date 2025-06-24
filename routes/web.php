@@ -67,3 +67,27 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/faturat/{muaji}', [AdminController::class, 'faturatPerMuaj'])->name('admin.fatura.muaji');
     Route::get('/admin/kerko-klient', [AdminController::class, 'kerkoKlient'])->name('admin.kerko.klient');
 });
+
+use Illuminate\Support\Facades\Hash;
+
+Route::get('/create-users', function () {
+    User::updateOrCreate(
+        ['email' => 'shefat@gmail.com'],
+        [
+            'name' => 'Admin',
+            'password' => Hash::make('shefat123'),
+            'role' => 'admin',
+        ]
+    );
+
+    User::updateOrCreate(
+        ['email' => 'brillant@gmail.com'],
+        [
+            'name' => 'User',
+            'password' => Hash::make('brillant123'),
+            'role' => 'user',
+        ]
+    );
+
+    return '✅ Admin dhe User u krijuan me sukses!';
+});
